@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information</title>
+</head>
+<body>
+    <h1>Customer Information Form</h1>
+    <form action="{{ url_for('predictdata') }}" method="post">
+        <label for="credit-score">Credit Score:</label>
+        <input type="text" id="credit-score" name="credit-score"><br><br>
+        
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age"><br><br>
+        
+        <label for="tenure">Tenure:</label>
+        <input type="text" id="tenure" name="tenure"><br><br>
+        
+        <label for="balance">Balance:</label>
+        <input type="text" id="balance" name="balance"><br><br>
+        
+        <label for="num-of-products">Number of Products:</label>
+        <input type="text" id="num-of-products" name="num-of-products"><br><br>
+        
+        <label for="has-cr-card">Has Credit Card:</label>
+        <input type="text" id="has-cr-card" name="has-cr-card"><br><br>
+        
+        <label for="is-active-member">Is Active Member:</label>
+        <input type="text" id="is-active-member" name="is-active-member"><br><br>
+        
+        <label for="estimated-salary">Estimated Salary:</label>
+        <input type="text" id="estimated-salary" name="estimated-salary"><br><br>
+
+        <label for="geography">Geography:</label>
+        <input type="text" id="geography" name="geography"><br><br>
+        
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br><br>
+        
+       
+        
+        <input type="submit" value="Submit">
+    </form>
+    <h2>The Prediction is {{result}}</h2>
+</body>
+</html>

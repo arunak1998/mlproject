@@ -1,12 +1,13 @@
 import os
 import sys
 
-import pandas
+import pandas as pd
 import dill
-import numpy
+import numpy as np
 from src.exception import Customexception
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.metrics import accuracy_score, classification_report,confusion_matrix
+from sklearn.preprocessing import OneHotEncoder
 def save_obj(file_path,obj):
 
     try:
@@ -24,6 +25,26 @@ def save_obj(file_path,obj):
     except Exception as e:
        raise Customexception(e,sys)
 
+from sklearn.preprocessing import OneHotEncoder
+
+class CustomOneHotEncoder(BaseEstimator, TransformerMixin):
+    def __init__(self, categorical_columns):
+        self.categorical_columns = categorical_columns
+        self.encoder = OneHotEncoder()
+
+    def fit(self, X, y=None):
+        self.encoder.fit(X[self.categorical_columns])
+        return self
+
+    def transform(self, X):
+        one_hot_encoded = self.encoder.transform(X[self.categorical_columns])
+        X.drop(self.categorical_columns, axis=1, inplace=True)
+        print(X.shape)
+        print(one_hot_encoded.shape)
+        arr= np.concatenate([X.values, one_hot_encoded.toarray()], axis=1)
+        print(arr.shape)
+        return arr
+    
 
 class OutlierRemover(BaseEstimator, TransformerMixin):
     def __init__(self, col):
@@ -66,3 +87,12 @@ def evaluvate_model(X_train,X_test,y_train,y_test,model):
     except Exception as e:
 
             raise Customexception(e,sys)
+    
+
+def load_object(file_path):
+    try:
+        with open(file_path, 'rb') as file:
+                return dill.load(file)
+            
+    except Exception as e:
+        raise Customexception(e,sys)

@@ -27,7 +27,7 @@ class ModelTrainer:
             X_train,y_train,X_test,y_test=(
                 train_arr[:,:-1],train_arr[:,-1],test_arr[:,:-1],test_arr[:,-1]
             )
-            print(X_train.shape)
+          
 
             model = XGBClassifier(
                 n_estimators=100, 
